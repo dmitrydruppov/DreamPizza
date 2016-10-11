@@ -10,7 +10,7 @@
        <table>
            <c:forEach var="pizza" items="${pizzas}">
             <tr>
-                <td>${pizza.id} , ${pizza.name} ${pizza.dough.name} ${pizza.cost}грн -рецепт:
+                <td>Код пиццы: ${pizza.id} , ${pizza.name} ${pizza.dough.name},цена: ${pizza.cost}грн -рецепт:
                 <c:forEach var="recipe" items="${pizza.recipe}">
                     <td>${recipe.shopStock.name} кол-во ${recipe.amount}, </td>
                 </c:forEach>
@@ -18,5 +18,17 @@
             </tr>
             </c:forEach>
        </table>
+       <br/>
+
+       <form action="addToCard" method="post">
+                  <table>
+                      <tr>
+                           <td>Код пиццы : <input type="text" name="pizzaId"></td><td>Количество: <input type="text" name="pizzaCount"> </td>
+                      </tr>
+                      <tr>
+                           <td>Сделать заказ : <input type="submit"></td>
+                      </tr>
+                  </table>
+       </form>
 </body>
 </html>

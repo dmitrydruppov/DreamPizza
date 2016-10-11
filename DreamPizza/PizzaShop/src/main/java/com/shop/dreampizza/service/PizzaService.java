@@ -19,4 +19,6 @@ public interface PizzaService {
 
     @WebMethod
     Pizza[] getAllPizzas();
+
+    Pizza getPizzaById(int id);
 }

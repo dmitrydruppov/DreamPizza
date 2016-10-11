@@ -44,8 +44,6 @@ public class OrderTestShop1 {
     public static void main(String args[]) throws IOException, TimeoutException {
         showMenu();
 
-        //ApplicationContext applicationContext = new ClassPathXmlApplicationContext("SpringBeans.xml");
-
         OrderServiceImplServiceShop2 orderServiceImplService = new OrderServiceImplServiceShop2();
         OrderService orderService = orderServiceImplService.getOrderServiceImplPort();
         IntArray intArray1 = new IntArray();

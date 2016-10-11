@@ -19,12 +19,11 @@ public class DreamPizzaController {
     private static final Logger LOG = Logger.getLogger(DreamPizzaController.class);
     @Autowired private PizzaService pizzaService;
 
-    @RequestMapping(value = "/pizzas", method = RequestMethod.GET)
+    @RequestMapping(value = {"/pizzas", "/"}, method = RequestMethod.GET)
     public ModelAndView printAllPizzas() {
         LOG.warn("init message");
         ModelAndView modelAndView = new ModelAndView("pizzas");
         modelAndView.addObject("pizzas", pizzaService.getAllPizzas());
         return modelAndView;
     }
-
 }

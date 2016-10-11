@@ -37,6 +37,17 @@ public class PizzaServiceMongoDB implements PizzaService {
         return pizzas;
     }
 
+    @Override
+    public Pizza getPizzaById(int id) {
+        Pizza pizza = pizzaDao.getPizzaById(id);
+        Recipe[] recipe = recipeDao.getProductsByPizzaId(pizza.getId());
+        LOG.info(recipe);
+        pizza.setRecipe(recipeDao.getProductsByPizzaId(pizza.getId()));
+        pizza.setCost(pizzaDao.findCostPizza(pizza));
+        LOG.info(pizza);
+        return pizza;
+    }
+
     public static void main(String[] args) {
 
     }

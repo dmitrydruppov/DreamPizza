@@ -58,14 +58,14 @@ public class PizzaDaoMongo implements PizzaDao {
             BigDecimal costOfIngridients = product.getPrice().
                     multiply(BigDecimal.valueOf(recipe.getAmount())).
                     divide(BigDecimal.valueOf(100));
-            System.out.println("ingr: " + costOfIngridients);
+            //System.out.println("ingr: " + costOfIngridients);
 
             BigDecimal costOfWork = new BigDecimal(costOfIngridients.doubleValue());
             costOfWork = costOfWork.multiply(BigDecimal.valueOf(DEFAULT_WORK_PERCANTAGE))
                     .divide(BigDecimal.valueOf(100));
 
             costOfPizza = costOfPizza.add(costOfWork).add(costOfIngridients);
-            System.out.println("costWork: " +  costOfWork);
+            //System.out.println("costWork: " +  costOfWork);
         }
         return costOfPizza.setScale(2, BigDecimal.ROUND_CEILING);
     }

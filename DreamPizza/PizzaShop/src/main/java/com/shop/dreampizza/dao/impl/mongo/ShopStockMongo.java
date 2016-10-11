@@ -28,7 +28,6 @@ import java.util.Arrays;
 public class ShopStockMongo implements ShopStockDao {
 
     private static final Logger LOG = Logger.getLogger(ShopStock.class);
-    private static final long DEFAULT_WORK_PERCANTAGE = 10;
     @Autowired private MongoOperations mongoOperations;
 
     @Override

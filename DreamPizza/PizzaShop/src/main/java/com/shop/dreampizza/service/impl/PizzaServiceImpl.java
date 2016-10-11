@@ -24,7 +24,7 @@ import java.sql.Connection;
  */
 
 @WebService(endpointInterface = "com.shop.dreampizza.service.PizzaService")
-public class PizzaServiceImpl implements PizzaService {
+public class PizzaServiceImpl implements PizzaService  {
 
     private static final Logger LOG = Logger.getLogger(PizzaServiceImpl.class);
     private PizzaDao pizzaDao;
@@ -35,6 +35,11 @@ public class PizzaServiceImpl implements PizzaService {
         pizzaDao = new PizzaDaoImpl();
         doughDao = new DoughDaoImpl();
         recipeDao = new RecipeDaoImpl();
+    }
+
+    @Override
+    public Pizza getPizzaById(int id) {
+        return null;
     }
 
     @Override

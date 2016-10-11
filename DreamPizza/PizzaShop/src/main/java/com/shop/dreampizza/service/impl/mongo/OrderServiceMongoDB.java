@@ -11,7 +11,6 @@ import javax.jws.WebParam;
 /**
  * Created by Dmytro_Druppov on 9/30/2016.
  */
-@Service
 public class OrderServiceMongoDB implements com.shop.dreampizza.service.OrderService {
 
     @Override

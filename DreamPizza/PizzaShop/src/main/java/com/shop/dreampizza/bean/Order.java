@@ -19,7 +19,6 @@ public class Order {
     private String customerName;
     private BigDecimal cost;
     private PizzaOrder[] pizzaOrder;
-    //private Ingredient ingredients;
 
     public String getId() {
         return id;
@@ -68,12 +67,5 @@ public class Order {
     public void setPizzaOrder(PizzaOrder[] pizzaOrder) {
         this.pizzaOrder = pizzaOrder;
     }
-//
-//    public Ingredient getIngredients() {
-//        return ingredients;
-//    }
-//
-//    public void setIngredients(Ingredient ingredients) {
-//        this.ingredients = ingredients;
-//    }
+
 }
