@@ -3,6 +3,8 @@ package com.shop.dreampizza.bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -10,8 +12,9 @@ import java.math.BigInteger;
  * Created by Dmytro_Druppov on 9/21/2016.
  */
 
+@XmlRootElement(name = "ShopStock")
 @Document(collection = ShopStock.COLECTION_NAME)
-public class ShopStock {
+public class ShopStock implements Serializable {
 
     public static final String COLECTION_NAME = "shopstock";
     @Id

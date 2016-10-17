@@ -46,6 +46,8 @@ public class OrderServiceImpl implements OrderService{
         Connection connection = new FactoryDataSource().getConnection();
         TransactionManager transactionManager = new TransactionManager();
         try {
+            connection.setAutoCommit(false);
+            transactionManager.setConnection(connection);
             Order order = orderDao.getOrderById(id);
             return order;
         } catch (Exception e) {
@@ -89,6 +91,7 @@ public class OrderServiceImpl implements OrderService{
             pizzaOrder.setAmount(amountArrays[i]);
             shopStockDao.update(recipeDao.getRecipeByPizaId(idArrays[i]));
             fullCost = fullCost.add(orderDao.findCostPizza(idArrays[i]).multiply(new BigDecimal(amountArrays[i])));
+            order.setCost(fullCost);
             pizzaOrderList.add(pizzaOrder);
         }
         return pizzaOrderList;
@@ -100,7 +103,6 @@ public class OrderServiceImpl implements OrderService{
         BigDecimal fullCost = new BigDecimal(0);
         List<PizzaOrder> pizzaOrderList = getPizzasOrderList(idArrays, amountArrays, order, fullCost);
         order.setPizzaOrder(pizzaOrderList.toArray(new PizzaOrder[pizzaOrderList.size()]));
-        order.setCost(fullCost);
         insertPizzasToOrder(order, pizzaOrderList);
     }
 

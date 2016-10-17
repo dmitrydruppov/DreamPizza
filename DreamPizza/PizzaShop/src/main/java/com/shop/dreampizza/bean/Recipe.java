@@ -3,11 +3,15 @@ package com.shop.dreampizza.bean;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+
 /**
  * Created by Dmytro_Druppov on 9/21/2016.
  */
-
-public class Recipe {
+@XmlRootElement(name = "Recipe")
+public class Recipe implements Serializable {
 
     @DBRef
     private ShopStock shopStock;
@@ -15,6 +19,7 @@ public class Recipe {
     private Pizza pizza;
     private int amount;
 
+    @XmlElement(name = "shopStock")
     public ShopStock getShopStock() {
         return shopStock;
     }
@@ -23,6 +28,7 @@ public class Recipe {
         this.shopStock = shopStock;
     }
 
+    @XmlElement(name = "pizza")
     public Pizza getPizza() {
         return pizza;
     }

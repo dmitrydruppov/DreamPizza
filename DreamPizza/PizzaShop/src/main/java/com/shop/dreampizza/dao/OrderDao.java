@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  */
 public interface OrderDao {
 
-    boolean makeOrder(Order order);
+    String makeOrder(Order order);
 
     BigDecimal findCostPizza(int idPizza);
 

@@ -49,7 +49,6 @@ public class ShopStockImpl implements ShopStockDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCT_BY_ID);
             for(Recipe product : recipe) {
-                //TODO Need to specify amount correctly
                 int fullAmount = product.getShopStock().getAmount() - product.getAmount();
                 LOG.info("product amount " + product.getShopStock().getAmount() + ", for pizza " + product.getAmount());
                 if (fullAmount >= 0) {

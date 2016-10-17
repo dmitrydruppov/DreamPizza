@@ -1,0 +1,38 @@
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://impl.service.dreampizza.shop.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://impl.service.dreampizza.shop.com/" name="OrderServiceImplService">
+    <import namespace="http://service.dreampizza.shop.com/" location="http://localhost:8080/PizzaShop/orderService?wsdl=1"/>
+    <binding xmlns:ns1="http://service.dreampizza.shop.com/" name="OrderServiceImplPortBinding" type="ns1:OrderService">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"/>
+        <operation name="makeOrder">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal" namespace="http://service.dreampizza.shop.com/"/>
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://service.dreampizza.shop.com/"/>
+            </output>
+        </operation>
+        <operation name="getOrderById">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal" namespace="http://service.dreampizza.shop.com/"/>
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://service.dreampizza.shop.com/"/>
+            </output>
+        </operation>
+        <operation name="getAllOrders">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal" namespace="http://service.dreampizza.shop.com/"/>
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://service.dreampizza.shop.com/"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="OrderServiceImplService">
+        <port name="OrderServiceImplPort" binding="tns:OrderServiceImplPortBinding">
+            <soap:address location="http://localhost:8080/PizzaShop/orderService"/>
+        </port>
+    </service>
+</definitions>

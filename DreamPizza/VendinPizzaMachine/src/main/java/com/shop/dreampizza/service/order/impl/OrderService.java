@@ -36,7 +36,7 @@ public interface OrderService {
     @WebMethod
     @WebResult(partName = "return")
     @Action(input = "http://service.dreampizza.shop.com/OrderService/makeOrderRequest", output = "http://service.dreampizza.shop.com/OrderService/makeOrderResponse")
-    public boolean makeOrder(
+    public String makeOrder(
             @WebParam(name = "arg0", partName = "arg0")
             IntArray arg0,
             @WebParam(name = "arg1", partName = "arg1")

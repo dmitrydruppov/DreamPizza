@@ -2,6 +2,7 @@ package com.shop.dreampizza.service.impl;
 
 import com.mysql.jdbc.log.Log;
 import com.shop.dreampizza.bean.Ingredient;
+import com.shop.dreampizza.bean.ListPizza;
 import com.shop.dreampizza.bean.Pizza;
 import com.shop.dreampizza.bean.Recipe;
 import com.shop.dreampizza.dao.DoughDao;

@@ -26,8 +26,8 @@ public class OrderDaoMongo implements OrderDao {
     }
 
     @Override
-    public boolean makeOrder(Order order) {
-        return false;
+    public String makeOrder(Order order) {
+        return null;
     }
 
     @Override

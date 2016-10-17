@@ -5,6 +5,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -14,6 +18,8 @@ import java.util.List;
 /**
  * Created by Dmytro_Druppov on 9/19/2016.
  */
+
+@XmlRootElement(name = "Pizza")
 @Document (collection = Pizza.COLLECTION_NAME)
 public class Pizza {
 
@@ -40,6 +46,7 @@ public class Pizza {
         this.name = name;
     }
 
+    @XmlElement(name = "dough", required = false)
     public Dough getDough() {
         return dough;
     }
@@ -48,6 +55,7 @@ public class Pizza {
         this.dough = dough;
     }
 
+    @XmlElement(name = "recipe", required = false)
     public Recipe[] getRecipe() {
         return recipe;
     }

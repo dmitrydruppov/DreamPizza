@@ -2,6 +2,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.shop.dreampizza.service.bean.Order;
+import com.shop.dreampizza.service.order.OrderServiceImplService;
 import com.shop.dreampizza.service.order.impl.OrderService;
 import com.shop.dreampizza.service.order.impl.OrderServiceImplServiceShop1;
 import com.shop.dreampizza.service.order.impl.OrderServiceImplServiceShop2;
@@ -44,8 +45,8 @@ public class OrderTestShop1 {
     public static void main(String args[]) throws IOException, TimeoutException {
         showMenu();
 
-        OrderServiceImplServiceShop2 orderServiceImplService = new OrderServiceImplServiceShop2();
-        OrderService orderService = orderServiceImplService.getOrderServiceImplPort();
+        OrderServiceImplService orderServiceImplService = new OrderServiceImplService();
+        com.shop.dreampizza.service.order.OrderService orderService = orderServiceImplService.getOrderServiceImplPort();
         IntArray intArray1 = new IntArray();
         IntArray intArray2 = new IntArray();
         Map<Integer, Integer> pizzas = new HashMap<>();
@@ -59,8 +60,9 @@ public class OrderTestShop1 {
             System.out.println("код :  " + entryPizza.getKey()  + ", количество: " + entryPizza.getValue()  );
         }
         orderService.makeOrder(intArray1, intArray2);
-
-        ConnectionFactory factory = new ConnectionFactory();
+        Order order = orderService.getOrderById("6381e2c2-20d4-48ca-94b8-8483f925cb65");
+        System.out.println(order.getId());
+        /* ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
@@ -70,6 +72,6 @@ public class OrderTestShop1 {
         System.out.println(" [x] Sent '" + message + "'");
 
         channel.close();
-        connection.close();
+        connection.close(); */
     }
 }

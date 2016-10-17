@@ -1,5 +1,5 @@
 
-package com.shop.dreampizza.service.bean;
+package com.generated.dreampizza.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+
 
 /**
  * <p>Java class for order complex type.

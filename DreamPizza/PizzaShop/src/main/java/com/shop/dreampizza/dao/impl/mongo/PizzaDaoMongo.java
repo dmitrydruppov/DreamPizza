@@ -1,5 +1,7 @@
 package com.shop.dreampizza.dao.impl.mongo;
 
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.shop.dreampizza.bean.Pizza;
 import com.shop.dreampizza.bean.Recipe;
 import com.shop.dreampizza.bean.ShopStock;
@@ -7,6 +9,8 @@ import com.shop.dreampizza.dao.PizzaDao;
 import com.shop.dreampizza.dao.impl.PizzaDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
@@ -22,6 +26,15 @@ public class PizzaDaoMongo implements PizzaDao {
 
     private static final int DEFAULT_WORK_PERCANTAGE = 10;
     @Autowired private MongoOperations mongoOperations;
+
+    {
+        try {
+            mongoOperations = new MongoTemplate(new SimpleMongoDbFactory(new Mongo("localhost", 27017), "dreampizza"));
+        } catch (Exception e) {
+
+        }
+    }
+
 
     @Override
     public boolean addPizza(Pizza pizza) {

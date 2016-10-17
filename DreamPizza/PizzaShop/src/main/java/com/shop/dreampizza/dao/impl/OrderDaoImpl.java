@@ -62,8 +62,9 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Order getOrderById(String id) {
         Connection connection = TransactionManager.getConnection();
-        Order order = null;
+        Order order = new Order();
         try(PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDER_BY_ID)) {
+            preparedStatement.setString(1, id);
             OrderConvertor convertor = new OrderConvertor();
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -76,13 +77,15 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public boolean makeOrder(Order order) {
+    public String makeOrder(Order order) {
         Connection connection = TransactionManager.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDER)) {
             LOG.info("order " + order.getId() +  ", " + order.getCost());
             preparedStatement.setString(1, order.getId());
             preparedStatement.setBigDecimal(2, order.getCost());
-            return preparedStatement.execute();
+            preparedStatement.execute();
+
+            return order.getId();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

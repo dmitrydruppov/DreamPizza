@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -30,13 +31,21 @@ public class ShopStockMongo implements ShopStockDao {
     private static final Logger LOG = Logger.getLogger(ShopStock.class);
     @Autowired private MongoOperations mongoOperations;
 
+    {
+        try {
+            mongoOperations = new MongoTemplate(new SimpleMongoDbFactory(new Mongo("localhost", 27017), "dreampizza"));
+        } catch (Exception e) {
+
+        }
+    }
+
     @Override
     public Recipe[] getProductsByPizzaId(int id) {
-        Pizza pizza = mongoOperations.findOne(Query.query(Criteria.where("id").is(id)), Pizza.class);
+        Pizza pizza = mongoOperations.findOne(Query.query(Criteria.where("_id").is(id)), Pizza.class);
         for(Recipe recipe : pizza.getRecipe()) {
             int productId = recipe.getShopStock().getId();
             LOG.info("id: " + productId);
-                ShopStock shopStock = mongoOperations.findOne(Query.query(Criteria.where("id").is(productId)), ShopStock.class);
+                ShopStock shopStock = mongoOperations.findOne(Query.query(Criteria.where("_id").is(productId)), ShopStock.class);
                 LOG.info("* " + shopStock);
                 LOG.info("product " + productId + " - " + shopStock.getName());
                 recipe.setShopStock(shopStock);
