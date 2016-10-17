@@ -18,7 +18,6 @@
     <session-timeout>120</session-timeout>
   </session-config>
 
-
   <!-- jax-rs
   <servlet>
       <display-name>CXFNonSpringJaxrsServlet</display-name>

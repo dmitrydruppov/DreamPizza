@@ -34,7 +34,7 @@ public class PizzaServiceREST extends SpringBeanAutowiringSupport implements Piz
 
     @GET
     @Produces("application/json")
-    @Path("rest/getMenu")
+    @Path("/getMenu")
     public Pizza[] getAllPizzas() {
         List<Pizza> pizzas = Arrays.asList(pizzaDao.getPizzas());
         for (Pizza pizza : pizzas) {

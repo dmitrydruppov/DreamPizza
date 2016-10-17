@@ -1,6 +1,7 @@
 package com.shop.dreampizza.dao.impl.mongo;
 
 import com.shop.dreampizza.bean.Order;
+import com.shop.dreampizza.bean.Pizza;
 import com.shop.dreampizza.dao.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -27,7 +28,8 @@ public class OrderDaoMongo implements OrderDao {
 
     @Override
     public String makeOrder(Order order) {
-        return null;
+        mongoOperations.insert(order);
+        return "ok";
     }
 
     @Override

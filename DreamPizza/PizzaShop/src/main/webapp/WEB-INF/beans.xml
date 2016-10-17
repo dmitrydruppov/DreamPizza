@@ -15,9 +15,17 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
 
     <jaxrs:server id="dreamPizza" address="/dreamPizza">
         <jaxrs:serviceBeans>
-            <ref bean="customerBean" />
+            <ref bean="pizzaBean" />
+            <ref bean="orderBean" />
         </jaxrs:serviceBeans>
+
     </jaxrs:server>
 
-    <bean id="customerBean" class="com.shop.dreampizza.service.impl.mongo.ws.PizzaServiceREST" />
+    <!--<jaxrs:providers>
+        <ref bean='jsonProvider' />
+    </jaxrs:providers>-->
+
+    <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+    <bean id="pizzaBean" class="com.shop.dreampizza.service.impl.mongo.ws.PizzaServiceREST" />
+    <bean id="orderBean" class="com.shop.dreampizza.service.impl.mongo.ws.OrderServiceREST" />
 </beans>

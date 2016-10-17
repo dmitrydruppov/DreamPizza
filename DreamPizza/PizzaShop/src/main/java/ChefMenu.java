@@ -37,12 +37,13 @@ public class ChefMenu {
                 OrderService orderService = orderServiceImplService.getOrderServiceImplPort();
                 OrderArray orderArray = orderService.getAllOrders();
                 List<Order> orderList = orderArray.getItem();
-                Collections.sort(orderList, new Comparator<Order>() {
-                    @Override
-                    public int compare(Order o1, Order o2) {
-                        return o1.getDate().compare(o2.getDate());
-                    }
-                });
+                //Collections.sort(orderList, (Order o1, Order o2) -> o1.getDate().compare(o2.getDate());
+//                        new Comparator<Order>() {
+//                    @Override
+//                    public int compare(Order o1, Order o2) {
+//                        return o1.getDate().compare(o2.getDate());
+//                    }
+//                });
 
                 Order order = orderList.get(orderList.size() - 1);
                 System.out.println("Заказ: " + order.getDate());

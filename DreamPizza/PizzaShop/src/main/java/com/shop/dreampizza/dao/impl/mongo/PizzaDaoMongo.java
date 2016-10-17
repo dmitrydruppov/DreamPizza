@@ -27,15 +27,6 @@ public class PizzaDaoMongo implements PizzaDao {
     private static final int DEFAULT_WORK_PERCANTAGE = 10;
     @Autowired private MongoOperations mongoOperations;
 
-    {
-        try {
-            mongoOperations = new MongoTemplate(new SimpleMongoDbFactory(new Mongo("localhost", 27017), "dreampizza"));
-        } catch (Exception e) {
-
-        }
-    }
-
-
     @Override
     public boolean addPizza(Pizza pizza) {
         return false;
