@@ -21,7 +21,7 @@ public interface OrderService {
     Order getOrderById(String order);
 
     @WebMethod
-    void makeOrder(int[] idArray, int[] amountArray);
+    String makeOrder(int[] idArray, int[] amountArray);
 
     @WebMethod
     Order[] getAllOrders();

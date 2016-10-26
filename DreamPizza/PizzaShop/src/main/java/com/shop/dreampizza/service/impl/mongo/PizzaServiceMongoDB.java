@@ -24,7 +24,7 @@ import java.util.List;
 
 
 @Service
-@Qualifier("site")
+@Qualifier("pizza")
 public class PizzaServiceMongoDB implements PizzaService {
 
     private static final Logger LOG = Logger.getLogger(PizzaServiceMongoDB.class);
@@ -41,12 +41,22 @@ public class PizzaServiceMongoDB implements PizzaService {
         }
         LOG.info(pizzas);
         return pizzas.toArray(new Pizza[pizzas.size()]);
-//        ListPizza newListPizzas = new ListPizza();
-//        newListPizzas.setName("Hello world");
-//        newListPizzas.setListPizzas(pizzas);
-//        return newListPizzas;
     }
 
+    @Override
+    public boolean removePizza(int id) {
+        return pizzaDao.removePizza(id);
+    }
+
+    @Override
+    public boolean updatePizza(int id, Pizza pizza) {
+        return pizzaDao.updatePizza(id, pizza);
+    }
+
+    @Override
+    public String createPizza(Pizza pizza) {
+        return pizzaDao.addPizza(pizza);
+    }
 
     public Pizza getPizzaById(int id) {
         Pizza pizza = pizzaDao.getPizzaById(id);
@@ -56,9 +66,5 @@ public class PizzaServiceMongoDB implements PizzaService {
         pizza.setCost(pizzaDao.findCostPizza(pizza));
         LOG.info(pizza);
         return pizza;
-    }
-
-    public static void main(String[] args) {
-
     }
 }

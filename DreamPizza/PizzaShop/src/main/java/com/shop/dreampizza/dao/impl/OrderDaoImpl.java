@@ -39,7 +39,6 @@ public class OrderDaoImpl implements OrderDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override

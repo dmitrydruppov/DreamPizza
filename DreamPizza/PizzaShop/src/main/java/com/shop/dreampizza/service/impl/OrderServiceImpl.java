@@ -28,7 +28,7 @@ public class OrderServiceImpl implements OrderService{
 
     private static final Logger LOG = Logger.getLogger(OrderServiceImpl.class);
     private PizzaDao pizzaDao;
-    private OrderDao orderDao;
+    private OrderDaoImpl orderDao;
     private ShopStockDao shopStockDao;
     private PizzaOrderDao pizzaOrderDao;
     private RecipeDao recipeDao;
@@ -114,7 +114,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public void makeOrder(@WebParam(name = "id") int[] idArrays, @WebParam(partName = "amount") int amountArrays[]) {
+    public String makeOrder(@WebParam(name = "id") int[] idArrays, @WebParam(partName = "amount") int amountArrays[]) {
         Connection connection = new FactoryDataSource().getConnection();
         TransactionManager transactionManager = new TransactionManager();
         transactionManager.setConnection(connection);
@@ -130,5 +130,6 @@ public class OrderServiceImpl implements OrderService{
             JDBCUtil.close(connection);
             transactionManager.clearConnection();
         }
+        return "ok";
     }
 }

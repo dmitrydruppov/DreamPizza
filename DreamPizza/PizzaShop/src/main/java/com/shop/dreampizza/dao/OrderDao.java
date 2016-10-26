@@ -11,8 +11,6 @@ public interface OrderDao {
 
     String makeOrder(Order order);
 
-    BigDecimal findCostPizza(int idPizza);
-
     Order[] getAllOrders();
 
     Order getOrderById(String id);

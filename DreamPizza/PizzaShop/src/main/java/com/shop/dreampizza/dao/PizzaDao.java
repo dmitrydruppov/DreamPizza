@@ -14,7 +14,7 @@ public interface PizzaDao {
 
     Pizza getPizzaById(int id);
 
-    boolean addPizza(Pizza pizza);
+    String addPizza(Pizza pizza);
 
     boolean removePizza(int id);
 

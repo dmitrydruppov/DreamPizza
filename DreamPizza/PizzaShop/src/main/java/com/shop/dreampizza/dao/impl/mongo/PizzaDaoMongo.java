@@ -24,31 +24,31 @@ import java.util.List;
 @Repository
 public class PizzaDaoMongo implements PizzaDao {
 
+    private static final String COLLECTION_NAME = "pizza";
     private static final int DEFAULT_WORK_PERCANTAGE = 10;
     @Autowired private MongoOperations mongoOperations;
 
-    {
-        try {
-            mongoOperations = new MongoTemplate(new SimpleMongoDbFactory(new Mongo("localhost", 27017), "dreampizza"));
-        } catch (Exception e) {
-
-        }
-    }
-
-
     @Override
-    public boolean addPizza(Pizza pizza) {
-        return false;
+    public String addPizza(Pizza pizza) {
+        mongoOperations.insert(pizza, COLLECTION_NAME);
+        return String.valueOf(pizza.getId());
     }
 
     @Override
     public boolean removePizza(int id) {
-        return false;
+        Pizza pizza = getPizzaById(id);
+        mongoOperations.remove(pizza, COLLECTION_NAME);
+        return true;
     }
 
     @Override
     public boolean updatePizza(int id, Pizza pizza) {
-        return false;
+        Pizza pizz = getPizzaById(id);
+        pizz.setName(pizza.getName());
+        pizz.setRecipe(pizza.getRecipe());
+        pizz.setDough(pizza.getDough());
+        mongoOperations.save(pizz, COLLECTION_NAME);
+        return true;
     }
 
     @Override

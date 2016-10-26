@@ -1,7 +1,6 @@
 package com.shop.dreampizza.controllers;
 
-import com.shop.dreampizza.bean.Pizza;
-import com.shop.dreampizza.controllers.card.PizzaCard;
+import com.shop.dreampizza.controllers.card.impl.PizzaCard;
 import com.shop.dreampizza.service.PizzaService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,9 @@ public class DreamOrderController {
 
     private static final Logger LOG = Logger.getLogger(DreamPizzaController.class);
     @Autowired
-    @Qualifier("site")
+    @Qualifier("pizza")
     PizzaService pizzaService;
-    @Autowired PizzaCard pizzaCard;
+    PizzaCard pizzaCard = new PizzaCard();
 
 //    @RequestMapping(value = "/makeOrder", method = RequestMethod.POST)
 //    public ModelAndView makeOrder() {
@@ -43,8 +42,7 @@ public class DreamOrderController {
     @RequestMapping(value = "/addToCard", method = RequestMethod.POST)
     public ModelAndView addToCard(@RequestParam("pizzaId") int pizzaId, @RequestParam("pizzaCount") int pizzaCount) {
         ModelAndView modelAndView = new ModelAndView("shopCard");
-        Pizza pizza = pizzaService.getPizzaById(pizzaId);
-        pizzaCard.addPizza(pizza, pizzaCount);
+        pizzaCard.addPizza(pizzaId, pizzaCount);
         modelAndView.addObject("shopCard", pizzaCard.getCard());
         return modelAndView;
     }

@@ -19,7 +19,7 @@ public class DreamPizzaController {
 
     private static final Logger LOG = Logger.getLogger(DreamPizzaController.class);
     @Autowired
-    @Qualifier("site")
+    @Qualifier("pizza")
     private PizzaService pizzaService;
 
     @RequestMapping(value = {"/pizzas"}, method = RequestMethod.GET)

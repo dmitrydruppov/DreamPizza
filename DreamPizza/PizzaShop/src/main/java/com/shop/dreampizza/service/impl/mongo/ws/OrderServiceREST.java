@@ -1,59 +1,64 @@
-package com.shop.dreampizza.service.impl.mongo;
+package com.shop.dreampizza.service.impl.mongo.ws;
 
 import com.shop.dreampizza.bean.*;
 import com.shop.dreampizza.dao.OrderDao;
 import com.shop.dreampizza.dao.PizzaDao;
+import com.shop.dreampizza.dao.RecipeDao;
 import com.shop.dreampizza.dao.ShopStockDao;
 import com.shop.dreampizza.service.OrderService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
- * Created by Dmytro_Druppov on 9/30/2016.
+ * Created by Dmytro_Druppov on 10/17/2016.
  */
 @Service
-@Qualifier("order")
-public class OrderServiceMongoDB implements OrderService {
+@Produces(MediaType.APPLICATION_JSON)
+@Path("/serviceOrder")
+public class OrderServiceREST extends SpringBeanAutowiringSupport implements OrderService {
 
-    private static final Logger LOG = Logger.getLogger(OrderService.class);
-    @Autowired private PizzaDao pizzaDao;
     @Autowired private OrderDao orderDao;
+    @Autowired private PizzaDao pizzaDao;
     @Autowired private ShopStockDao recipeDao;
-    private static final String DEFAULT_ADDRESS = "Pushkinskaya st";
 
+    @GET
+    @Path("/getAllOrders")
     public Order[] getAllOrders() {
-        return orderDao.getAllOrders();
+        return new Order[0];
     }
 
-
-    public Order getOrderById(String order) {
-        return orderDao.getOrderById(order);
+    @GET
+    @Path("/getOrder/{id}")
+    public Order getOrderById(@PathParam("order") String order) {
+        return null;
     }
 
-
-//    public String makeOrderService(OrderBody orderBody) {
+//    @POST
+//    @Path("/makeOrder")
+//    public void makeOrder(OrderBody orderBody) throws Exception {
+//
 //        List<PizzaOrder> orderedPizzas = new ArrayList<>();
-//        System.out.println(Arrays.toString(orderBody.getAmountArray()));
-//        System.out.println(Arrays.toString(orderBody.getIdArray()));
+////        JSONArray ids = orderBody.getJSONArray("idArray");
+////        JSONArray amount = orderBody.getJSONArray("amountArray");
 //
 //        Integer[] idArray = orderBody.getIdArray();
 //        Integer[] amountArray = orderBody.getAmountArray();
 //
+////        for(int i = 0; i < ids.length(); i++) {
+////            idArray[i] = ids.getInt(i);
+////            amountArray[i] = amount.getInt(i);
+////        }
+//
 //        BigDecimal costOrder = new BigDecimal(0);
 //        for(int i = 0; i < idArray.length; i++) {
 //            PizzaOrder pizzaOrder = new PizzaOrder();
-//            Pizza pizza = pizzaDao.getPizzaById(idArray[i]);
-//            Recipe[] recipe = recipeDao.getProductsByPizzaId(pizza.getId());
-//            pizza.setRecipe(recipe);
-//            pizza.setCost(pizzaDao.findCostPizza(pizza));
-//            pizzaOrder.setPizza(pizza);
+//            pizzaOrder.setPizza(pizzaDao.getPizzaById(idArray[i]));
 //            orderedPizzas.add(pizzaOrder);
 //            costOrder = costOrder.add(new BigDecimal(pizzaOrder.getPizza().getCost().doubleValue()).multiply(new BigDecimal(amountArray[i])));
 //        }
@@ -62,21 +67,29 @@ public class OrderServiceMongoDB implements OrderService {
 //        order.setPizzaOrder(orderedPizzas.toArray(new PizzaOrder[orderedPizzas.size()]));
 //        order.setDate(new Date());
 //        orderDao.makeOrder(order);
-//        return "ok: " + order.getId();
 //    }
 
-
-    @Override
-    public String makeOrder(int[] idArray, int[] amountArray) {
+    @POST
+    @Path("/makeOrder")
+    public void makeOrderService(OrderBody orderBody) {
         List<PizzaOrder> orderedPizzas = new ArrayList<>();
+
+
+        System.out.println(Arrays.toString(orderBody.getAmountArray()));
+        System.out.println(Arrays.toString(orderBody.getIdArray()));
+
+        Integer[] idArray = orderBody.getIdArray();
+        Integer[] amountArray = orderBody.getAmountArray();
 
         BigDecimal costOrder = new BigDecimal(0);
         for(int i = 0; i < idArray.length; i++) {
             PizzaOrder pizzaOrder = new PizzaOrder();
+
             Pizza pizza = pizzaDao.getPizzaById(idArray[i]);
             Recipe[] recipe = recipeDao.getProductsByPizzaId(pizza.getId());
             pizza.setRecipe(recipe);
             pizza.setCost(pizzaDao.findCostPizza(pizza));
+
             pizzaOrder.setPizza(pizza);
             orderedPizzas.add(pizzaOrder);
             costOrder = costOrder.add(new BigDecimal(pizzaOrder.getPizza().getCost().doubleValue()).multiply(new BigDecimal(amountArray[i])));
@@ -86,6 +99,10 @@ public class OrderServiceMongoDB implements OrderService {
         order.setPizzaOrder(orderedPizzas.toArray(new PizzaOrder[orderedPizzas.size()]));
         order.setDate(new Date());
         orderDao.makeOrder(order);
-        return "ok: " + order.getId();
+    }
+
+    @Override
+    public String makeOrder(int[] idArray, int[] amountArray) {
+        return null;
     }
 }

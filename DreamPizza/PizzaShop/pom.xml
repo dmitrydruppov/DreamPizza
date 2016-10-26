@@ -31,11 +31,20 @@
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
             <version>2.6.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-bundle-jaxrs -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-bundle-jaxrs</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>2.6.1</version>
         </dependency>
+
+        <!-- for json output -->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider -->
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
@@ -43,15 +52,6 @@
             <version>2.2.3</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.codehaus.jettison/jettison -->
-        <dependency>
-            <groupId>org.codehaus.jettison</groupId>
-            <artifactId>jettison</artifactId>
-            <version>1.3.8</version>
-        </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-rs-extension-providers -->
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-extension-providers</artifactId>
@@ -92,7 +92,6 @@
             <version>1.2</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -130,16 +129,6 @@
             <version>2.11.4</version>
         </dependency>
 
-        <!--
-        Jackson JSON Mapper
-        Тащу его всегда, когда нужно писать API на базе JSON объектов.
-        В нашем случае можете эту библиотеку не тянуть.
-        -->
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>${version.jackson}</version>
-        </dependency>
 
         <!-- Servlet Api -->
         <dependency>
@@ -159,6 +148,7 @@
     </dependencies>
 
     <build>
+
         <finalName>PizzaShop</finalName>
         <plugins>
                 <plugin>
@@ -177,7 +167,7 @@
                         <stopPort>9990</stopPort>
                     </configuration>
                 </plugin>
-            <plugin>
+           <!-- <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <archive>
@@ -198,17 +188,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <inherited>true</inherited>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
+            </plugin> -->
         </plugins>
     </build>
 </project>

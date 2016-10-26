@@ -26,8 +26,8 @@ public class PizzaDaoImpl implements PizzaDao {
     //private static final String SQL_GET_DOUGH = "SELECT * FROM dough WHERE idDough=?";
 
     @Override
-    public boolean addPizza(Pizza pizza) {
-        return false;
+    public String addPizza(Pizza pizza) {
+        return null;
     }
 
     @Override

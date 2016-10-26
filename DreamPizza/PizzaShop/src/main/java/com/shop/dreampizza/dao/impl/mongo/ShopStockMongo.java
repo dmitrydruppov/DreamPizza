@@ -31,14 +31,6 @@ public class ShopStockMongo implements ShopStockDao {
     private static final Logger LOG = Logger.getLogger(ShopStock.class);
     @Autowired private MongoOperations mongoOperations;
 
-    {
-        try {
-            mongoOperations = new MongoTemplate(new SimpleMongoDbFactory(new Mongo("localhost", 27017), "dreampizza"));
-        } catch (Exception e) {
-
-        }
-    }
-
     @Override
     public Recipe[] getProductsByPizzaId(int id) {
         Pizza pizza = mongoOperations.findOne(Query.query(Criteria.where("_id").is(id)), Pizza.class);

@@ -31,10 +31,24 @@ public class PizzaServiceREST extends SpringBeanAutowiringSupport implements Piz
     @Autowired private PizzaDao pizzaDao;
     @Autowired private ShopStockDao recipeDao;
 
+    @Override
+    public boolean removePizza(int id) {
+        return false;
+    }
+
+    @Override
+    public String createPizza(Pizza pizza) {
+        return null;
+    }
+
+    @Override
+    public boolean updatePizza(int id, Pizza pizza) {
+        return false;
+    }
 
     @GET
     @Produces("application/json")
-    @Path("rest/getMenu")
+    @Path("/getMenu")
     public Pizza[] getAllPizzas() {
         List<Pizza> pizzas = Arrays.asList(pizzaDao.getPizzas());
         for (Pizza pizza : pizzas) {
@@ -58,6 +72,4 @@ public class PizzaServiceREST extends SpringBeanAutowiringSupport implements Piz
         return pizza;
     }
 
-    public static void main(String[] args) {
-    }
 }
